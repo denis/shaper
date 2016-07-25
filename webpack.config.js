@@ -1,3 +1,5 @@
+var WebpackBuildNotifierPlugin = require("webpack-build-notifier");
+
 module.exports = {
     entry: "./src/index.tsx",
     output: {
@@ -32,4 +34,8 @@ module.exports = {
         "react": "React",
         "react-dom": "ReactDOM"
     },
+
+    plugins: [
+        new WebpackBuildNotifierPlugin({"sound": false})
+    ],
 };
