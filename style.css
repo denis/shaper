@@ -1,13 +1,36 @@
 html {
-  overflow:hidden;
-  background: #fff;
+  overflow: hidden;
 }
 
-#shaper {
+.editor {
   position: absolute;
-  top: 0.5em;
-  right: 0.5em;
-  bottom: 0.5em;
-  left: 0.5em;
-  background: #eef;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.palette {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  padding: 15px;
+  background: #2A2F36;
+  border-right: 1px solid #222;
+}
+
+.canvas {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 71px;
+  background: #f9f9f9;
+}
+
+.canvas svg {
+  width: 100%;
+  height: 100%;
 }
