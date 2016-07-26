@@ -9,9 +9,9 @@ export interface PaletteProps {
 export class Palette extends React.Component<PaletteProps, {}> {
   render() {
     return <div className="palette">
-      <PaletteItem type="circle" size={this.props.size} />
-      <PaletteItem type="square" size={this.props.size} />
-      <PaletteItem type="triangle" size={this.props.size} />
+      <PaletteItem shape="circle" size={this.props.size} />
+      <PaletteItem shape="square" size={this.props.size} />
+      <PaletteItem shape="triangle" size={this.props.size} />
     </div>;
   }
 }

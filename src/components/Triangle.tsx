@@ -8,8 +8,8 @@ export interface TriangleProps {
 
 export class Triangle extends React.Component<TriangleProps, {}> {
   render() {
-    let shape = this.props.shape;
-    
+    let {shape} = this.props;
+
     return <polygon
       points={`${shape.x - shape.size / 2} ${shape.y + shape.size / 2},
                ${shape.x + shape.size / 2} ${shape.y + shape.size / 2},

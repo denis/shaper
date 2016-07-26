@@ -7,30 +7,34 @@ import {Triangle} from "./Triangle.tsx";
 import * as models from "../models/shapes.ts";
 
 export interface PaletteItemProps {
-  type: string;
+  shape: string;
   size: string;
 }
 
 export class PaletteItem extends React.Component<PaletteItemProps, {}> {
   render() {
-    return <div className="palette-item">
+    return <div className="palette-item" draggable="true" onDragStart={(e) => {this.dragStart(e, this.props.shape)}}>
       <svg width={this.props.size} height={this.props.size}>
-        {this.renderShape(this.props.type)}
+        {this.renderShape(this.props.shape)}
       </svg>
     </div>;
   }
 
-  private renderShape(type: string) {
+  private renderShape(shape: string) {
     let size = Number(this.props.size);
-    let center_x = size / 2;
-    let center_y = size / 2;
+    let centerX = size / 2;
+    let centerY = size / 2;
 
-    if (type == "circle") {
-      return <Circle shape={new models.Circle(center_x, center_y, size)} />;
-    } else if (type == "square") {
-      return <Square shape={new models.Square(center_x, center_y, size)} />;
-    } else if (type == "triangle") {
-      return <Triangle shape={new models.Triangle(center_x, center_y, size)} />;
+    if (shape == "circle") {
+      return <Circle shape={new models.Circle(centerX, centerY, size)} />;
+    } else if (shape == "square") {
+      return <Square shape={new models.Square(centerX, centerY, size)} />;
+    } else if (shape == "triangle") {
+      return <Triangle shape={new models.Triangle(centerX, centerY, size)} />;
     }
+  }
+
+  private dragStart(event: React.DragEvent, shape: string) {
+    event.dataTransfer.setData("shape", shape);
   }
 }

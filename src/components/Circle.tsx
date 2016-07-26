@@ -8,7 +8,7 @@ export interface CircleProps {
 
 export class Circle extends React.Component<CircleProps, {}> {
   render() {
-    const shape = this.props.shape;
+    const {shape} = this.props;
 
     return <circle
       cx={shape.x}
