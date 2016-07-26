@@ -9,7 +9,7 @@ export interface EditorProps {
 export class Editor extends React.Component<EditorProps, {}> {
   render() {
     return <div className="editor">
-      <Palette />
+      <Palette size="40" />
       <Canvas />
     </div>;
   }

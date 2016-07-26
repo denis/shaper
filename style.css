@@ -21,6 +21,10 @@ html {
   border-right: 1px solid #222;
 }
 
+.palette-item {
+  margin-bottom: 15px;
+}
+
 .canvas {
   position: absolute;
   top: 0;
