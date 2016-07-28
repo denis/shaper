@@ -8,7 +8,7 @@ export interface SquareProps {
 
 export class Square extends React.Component<SquareProps, {}> {
   render() {
-    let shape = this.props.shape;
+    let {shape} = this.props;
 
     return <rect
       x={shape.x - shape.size / 2}
