@@ -23,6 +23,7 @@ html {
 
 .palette-item {
   margin-bottom: 15px;
+  height: 40px;
 }
 
 .canvas {

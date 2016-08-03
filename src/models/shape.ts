@@ -26,6 +26,6 @@ export abstract class Shape {
   }
 
   set size(newSize: number) {
-    this.size = newSize;
+    this._size = newSize;
   }
 }
