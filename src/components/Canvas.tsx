@@ -5,24 +5,18 @@ import {CanvasItem} from "./CanvasItem.tsx";
 import * as models from "../models.ts";
 
 export interface CanvasProps {
+  shapes: models.Shape[];
+  onDrop: (shapeType: models.ShapeType, x: number, y: number) => void;
+  onMouseMove: (shapeId: number, x: number, y: number) => void;
 }
 
-export interface CanvasState {
-  shapes?: models.Shape[];
-  draggingShapeIndex?: number;
-  draggingShapeOffsetX?: number;
-  draggingShapeOffsetY?: number;
-}
+export class Canvas extends React.Component<CanvasProps, {}> {
+  private draggingShapeIndex : number;
+  private draggingShapeOffsetX: number;
+  private draggingShapeOffsetY: number;
 
-export class Canvas extends React.Component<CanvasProps, CanvasState> {
   constructor(props: CanvasProps) {
     super(props);
-
-    this.state = {
-      shapes: [],
-      draggingShapeOffsetX: 0,
-      draggingShapeOffsetY: 0
-    };
 
     this.windowMouseMove = this.windowMouseMove.bind(this);
     this.windowMouseUp = this.windowMouseUp.bind(this);
@@ -35,7 +29,7 @@ export class Canvas extends React.Component<CanvasProps, CanvasState> {
     >
       <svg ref="svg">
         {
-          this.state.shapes.map((shape, i) => {
+          this.props.shapes.map((shape, i) => {
             return <CanvasItem
               shape={shape}
               key={i}
@@ -53,55 +47,32 @@ export class Canvas extends React.Component<CanvasProps, CanvasState> {
 
   private drop(event: React.DragEvent) {
     event.preventDefault();
-
-    let shape: models.Shape;
-    let shapeType = event.dataTransfer.getData("shapeType");
-
     let {x, y} = this.getEventCoordinates(event);
-    let size = 80;
-
-    if (shapeType == "circle") {
-      shape = new models.Circle(x, y, size);
-    } else if (shapeType == "square") {
-      shape = new models.Square(x, y, size);
-    } else if (shapeType == "triangle") {
-      shape = new models.Triangle(x, y, size);
-    }
-
-    this.setState({shapes: this.state.shapes.concat(shape)});
+    this.props.onDrop(event.dataTransfer.getData("shapeType") as models.ShapeType, x, y);
   }
 
   private shapeMouseDown(shape: models.Shape, event: React.MouseEvent) {
     let {x, y} = this.getEventCoordinates(event);
 
-    this.setState({
-      draggingShapeIndex: this.state.shapes.indexOf(shape),
-      draggingShapeOffsetX: x - shape.x,
-      draggingShapeOffsetY: y - shape.y
-    });
+    this.draggingShapeIndex = this.props.shapes.indexOf(shape);
+    this.draggingShapeOffsetX = x - shape.x;
+    this.draggingShapeOffsetY = y - shape.y;
 
     window.addEventListener("mousemove", this.windowMouseMove);
     window.addEventListener("mouseup", this.windowMouseUp);
   }
 
   private windowMouseMove(event: MouseEvent) {
-    if (this.state.draggingShapeIndex != null) {
-      let shape = this.state.shapes[this.state.draggingShapeIndex];
+    if (this.draggingShapeIndex != null) {
       let {x, y} = this.getEventCoordinates(event);
-
-      shape.x = x - this.state.draggingShapeOffsetX;
-      shape.y = y - this.state.draggingShapeOffsetY;
-
-      this.setState({shapes: this.state.shapes});
+      this.props.onMouseMove(this.draggingShapeIndex, x - this.draggingShapeOffsetX, y - this.draggingShapeOffsetY);
     }
   }
 
   private windowMouseUp(event: MouseEvent) {
-    this.setState({
-      draggingShapeIndex: null,
-      draggingShapeOffsetX: 0,
-      draggingShapeOffsetY: 0
-    });
+    this.draggingShapeIndex = null;
+    this.draggingShapeOffsetX = 0;
+    this.draggingShapeOffsetY = 0;
 
     window.removeEventListener("mousemove", this.windowMouseMove);
     window.removeEventListener("mouseup", this.windowMouseUp);
