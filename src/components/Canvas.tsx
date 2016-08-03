@@ -53,7 +53,7 @@ export class Canvas extends React.Component<CanvasProps, CanvasState> {
     event.preventDefault();
 
     let shape: models.Shape;
-    let shapeType = event.dataTransfer.getData("shape");
+    let shapeType = event.dataTransfer.getData("shapeType");
 
     let {x, y} = this.getEventCoordinates(event);
     let size = 80;
