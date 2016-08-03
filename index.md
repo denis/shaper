@@ -14,4 +14,4 @@ Shaper is a **shape** edito**r**.
 - [The user can drag shapes from the palette and drop them onto the drawing canvas](builds/4)
 - [The user can select and move a shape from its current position to another position on the canvas](builds/5)
 - [The drawing canvas allows shapes to overlap each other, placing the latest shape on top of previous shapes](builds/6)
-- The user can change the z-order of shapes, bringing individual shapes forward or pushing them back
+- [The user can change the z-order of shapes, bringing individual shapes forward or pushing them back](builds/7)
