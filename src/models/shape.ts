@@ -1,3 +1,5 @@
+export type ShapeType = "circle" | "square" | "triangle";
+
 export abstract class Shape {
   constructor(private _x: number, private _y: number, private _size: number) { }
 
