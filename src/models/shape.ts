@@ -1,7 +1,7 @@
 export type ShapeType = "circle" | "square" | "triangle";
 
 export abstract class Shape {
-  constructor(private _x: number, private _y: number, private _size: number) { }
+  constructor(private _x: number, private _y: number, private _size: number, private _fillColor: string = "#aaa") { }
 
   get x(): number {
     return this._x;
@@ -16,7 +16,7 @@ export abstract class Shape {
   }
 
   get fillColor(): string {
-    return "#aaa";
+    return this._fillColor;
   }
 
   set x(newX: number) {
@@ -29,5 +29,9 @@ export abstract class Shape {
 
   set size(newSize: number) {
     this._size = newSize;
+  }
+
+  set fillColor(newFillColor: string) {
+    this._fillColor = newFillColor;
   }
 }
