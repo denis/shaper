@@ -25,11 +25,11 @@ function addShape(state: State, action: AddShapeAction) {
   const size = 80;
 
   if (shapeType == "circle") {
-    shape = new models.Circle(x, y, size);
+    shape = new models.Circle(x, y, size, "#c99");
   } else if (shapeType == "square") {
-    shape = new models.Square(x, y, size);
+    shape = new models.Square(x, y, size, "#9c9");
   } else if (shapeType == "triangle") {
-    shape = new models.Triangle(x, y, size);
+    shape = new models.Triangle(x, y, size, "#99c");
   }
 
   return Object.assign({}, state, {
