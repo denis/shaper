@@ -56,6 +56,9 @@ function moveShape(state: State, action: MoveShapeAction) {
 
 function bringShapeForward(state: State, action: BringShapeForwardAction) {
   return Object.assign({}, state, {
-    shapes: [...state.shapes, state.shapes[action.shapeIndex]]
+    shapes: [
+      ...state.shapes.filter((shape, index) => index !== action.shapeIndex),
+      state.shapes[action.shapeIndex]
+    ]
   });
 }
