@@ -8,6 +8,7 @@ export interface CanvasProps {
   shapes: models.Shape[];
   onDrop: (shapeType: models.ShapeType, x: number, y: number) => void;
   onMouseMove: (shapeId: number, x: number, y: number) => void;
+  onDoubleClick: (shapeId: number, x: number, y: number) => void;
 }
 
 export class Canvas extends React.Component<CanvasProps, {}> {
@@ -34,6 +35,7 @@ export class Canvas extends React.Component<CanvasProps, {}> {
               shape={shape}
               key={i}
               onMouseDown={(shape, e) => {this.shapeMouseDown(shape, e)}}
+              onDoubleClick={(shape, e) => {this.shapeDoubleClick(shape, e)}}
             />
           })
         }
@@ -60,6 +62,11 @@ export class Canvas extends React.Component<CanvasProps, {}> {
 
     window.addEventListener("mousemove", this.windowMouseMove);
     window.addEventListener("mouseup", this.windowMouseUp);
+  }
+
+  private shapeDoubleClick(shape: models.Shape, event: React.MouseEvent) {
+    let {x, y} = this.getEventCoordinates(event);
+    this.props.onDoubleClick(this.props.shapes.indexOf(shape), x - this.draggingShapeOffsetX, y - this.draggingShapeOffsetY);
   }
 
   private windowMouseMove(event: MouseEvent) {

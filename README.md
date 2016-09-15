@@ -12,4 +12,4 @@ All builds are hosted on [GitHub Pages](http://barushev.net/shaper).
 - [x] The user can drag shapes from the palette and drop them onto the drawing canvas
 - [x] The user can select and move a shape from its current position to another position on the canvas
 - [x] The drawing canvas allows shapes to overlap each other, placing the latest shape on top of previous shapes
-- [ ] The user can change the z-order of shapes, bringing individual shapes forward or pushing them back
+- [x] The user can change the z-order of shapes, bringing individual shapes forward or pushing them back

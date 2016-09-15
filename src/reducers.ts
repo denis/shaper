@@ -2,7 +2,7 @@ import {Action} from "redux";
 
 import * as models from "./models.ts";
 import {State} from "./state.ts";
-import {ADD_SHAPE, MOVE_SHAPE, AddShapeAction, MoveShapeAction} from "./actions.ts";
+import {ADD_SHAPE, MOVE_SHAPE, BRING_SHAPE_FORWARD, AddShapeAction, MoveShapeAction, BringShapeForwardAction} from "./actions.ts";
 
 const initialState: State = {
   shapes: []
@@ -14,6 +14,8 @@ export function shaperApp(state: State = initialState, action: Action): State {
       return addShape(state, action as AddShapeAction);
     case MOVE_SHAPE:
       return moveShape(state, action as MoveShapeAction);
+    case BRING_SHAPE_FORWARD:
+      return bringShapeForward(state, action as BringShapeForwardAction)
     default:
       return state;
   }
@@ -49,5 +51,14 @@ function moveShape(state: State, action: MoveShapeAction) {
         return shape;
       }
     })
+  });
+}
+
+function bringShapeForward(state: State, action: BringShapeForwardAction) {
+  return Object.assign({}, state, {
+    shapes: [
+      ...state.shapes.filter((shape, index) => index !== action.shapeIndex),
+      state.shapes[action.shapeIndex]
+    ]
   });
 }
